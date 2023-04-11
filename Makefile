@@ -1,6 +1,6 @@
 prefix ?= /usr/local
 bindir = $(prefix)/bin
-libdir = /etc/mmaf-rec
+libdir = /opt/homebrew/etc/mmaf-rec
 
 build:
 	swift build -c release --disable-sandbox
