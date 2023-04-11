@@ -20,16 +20,16 @@ func main() {
     var mirs: [String]
     {
         get {
-            let p = try! FileManager.default.contents(atPath: Bundle.main.url(forResource: "mirrors_list", withExtension: "plist")!.path)
+            let p = try! FileManager.default.contents(atPath: Bundle.main.url(forResource: "mirrors_list", withExtension: "plist")?.path ?? "/opt/homebrew/etc/mmaf-rec/mirrors_list.plist")
             let res = try! PropertyListSerialization.propertyList(from: p!,options: .mutableContainersAndLeaves, format: nil) as! [String]
             return res as! [String]
         }
         set(val) {
-            let p = Bundle.module.url(forResource: "settings", withExtension: "plist")?.path
+            let p = Bundle.module.url(forResource: "settings", withExtension: "plist")?.path ?? "/opt/homebrew/etc/mmaf-rec/mirrors_list.plist"
 
             
             let da = try! PropertyListEncoder().encode(val)
-            try! da.write(to: URL.init(filePath: p!))
+            try! da.write(to: URL.init(filePath: p))
         }
     }
     var resp: String = ""
