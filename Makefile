@@ -1,6 +1,6 @@
 prefix ?= /usr/local
 bindir = $(prefix)/bin
-libdir = $(prefix)/lib
+libdir = /etc/mmaf-rec
 
 build:
 	swift build -c release --disable-sandbox
@@ -8,7 +8,7 @@ build:
 install: build
 	install -d "$(bindir)" "$(libdir)"
 	install ".build/release/mmaf" "$(bindir)"
-	install ".build/release/mirrors_list.plist" "$(libdir)"
+	install "./Sources/mmaf/mirrors_list.plist" "$(libdir)"
 
 
 uninstall:
