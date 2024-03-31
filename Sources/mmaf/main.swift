@@ -20,9 +20,9 @@ func main() {
     var mirs: [String]
     {
         get {
-            let p = try! FileManager.default.contents(atPath: Bundle.main.url(forResource: "mirrors_list", withExtension: "plist")?.path ?? "/opt/homebrew/etc/mmaf-rec/mirrors_list.plist")
+            let p = FileManager.default.contents(atPath: Bundle.main.url(forResource: "mirrors_list", withExtension: "plist")?.path ?? "/opt/homebrew/etc/mmaf-rec/mirrors_list.plist")
             let res = try! PropertyListSerialization.propertyList(from: p!,options: .mutableContainersAndLeaves, format: nil) as! [String]
-            return res as! [String]
+            return res 
         }
         set(val) {
             let p = Bundle.module.url(forResource: "settings", withExtension: "plist")?.path ?? "/opt/homebrew/etc/mmaf-rec/mirrors_list.plist"
@@ -51,7 +51,7 @@ func main() {
         case "a":
             print("\u{001B}[2J\u{001B}[3J\u{001B}[H")
             print("Input new mirror link:\n")
-            var m = readLine()
+            let m = readLine()
             if (m != "") {
                 var t: [String] = mirs
                 t.append(m!)
@@ -61,7 +61,7 @@ func main() {
         case "r":
             print("\u{001B}[2J\u{001B}[3J\u{001B}[H")
             print("Input line number to remove:\n")
-            var m = readLine()
+            let m = readLine()
             if (m != "" && Int(m!)! <= mirs.count) {
                 var t: [String] = mirs
                 t.remove(at: Int(m!)! - 1)

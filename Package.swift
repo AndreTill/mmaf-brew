@@ -13,9 +13,9 @@ let package = Package(
         .executable(name: "mmaf", targets: ["mmaf"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/QiuZhiFei/swift-commands.git", .upToNextMajor(from: "0.6.0")),
-        .package(url: "https://github.com/vapor/console-kit.git", .upToNextMajor(from: "4.0.0")),
-        .package(url: "https://github.com/apple/swift-log.git", .upToNextMajor(from: "1.0.0")),
+        .package(url: "https://github.com/QiuZhiFei/swift-commands.git", branch: "main"),
+        .package(url: "https://github.com/vapor/console-kit.git", branch: "main"),
+        .package(url: "https://github.com/apple/swift-log.git", branch: "main"),
     
     ],
     targets: [
