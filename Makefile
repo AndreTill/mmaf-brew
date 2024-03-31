@@ -1,10 +1,9 @@
 prefix ?= /usr/local
 bindir = $(prefix)/bin
-libdir = /opt/homebrew/etc/mmaf-rec
+libdir = /usr/local/lib
 
 build:
-	swift build -c release --disable-sandbox
-
+	swift build -c release
 install: build
 	install -d "$(bindir)" "$(libdir)"
 	install ".build/release/mmaf" "$(bindir)"

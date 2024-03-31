@@ -1,4 +1,4 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,16 +6,16 @@ import PackageDescription
 let package = Package(
     name: "mmaf",
     platforms: [
-            .macOS(.v13)
+            .macOS(.v14)
         ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .executable(name: "mmaf", targets: ["mmaf"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/QiuZhiFei/swift-commands.git", .upToNextMajor(from: "0.6.0")),
-        .package(url: "https://github.com/vapor/console-kit.git", .upToNextMajor(from: "4.0.0")),
-        .package(url: "https://github.com/apple/swift-log.git", .upToNextMajor(from: "1.0.0")),
+        .package(url: "https://github.com/QiuZhiFei/swift-commands.git", branch: "main"),
+        .package(url: "https://github.com/vapor/console-kit.git", branch: "main"),
+        .package(url: "https://github.com/apple/swift-log.git", branch: "main"),
     
     ],
     targets: [
@@ -29,7 +29,8 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
             ],
             resources: [
-                        .process("mirrors_list.plist")
+                        .process("mirrors_list.plist"),
+                        .process("List.txt")
             ]
 ),
 
