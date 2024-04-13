@@ -32,7 +32,7 @@ let package = Package(
                         .process("mirrors_list.plist"),
                         .process("List.txt")
             ]
-),
 
-    ]
-)
+),
+        ]
+       )

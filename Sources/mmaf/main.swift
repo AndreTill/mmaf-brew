@@ -22,12 +22,15 @@ func main() {
     var mirs: [String]
     {
         get {
-            let p = FileManager.default.contents(atPath: Bundle.main.url(forResource: "mirrors_list", withExtension: "plist")?.path ?? "/usr/local/share/opt-viewer/mirrors_list.plist")
+            if (FileManager.default.fileExists(atPath: "/usr/local/share/opt-viewer/mirrors_list.plist") == false) {
+                FileManager.default.createFile(atPath: "/usr/local/share/opt-viewer/mirrors_list.plist", contents: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"><plist version=\"1.0\"><array/></plist>".data(using: String.Encoding.utf8))
+            }
+            let p = FileManager.default.contents(atPath:  "/usr/local/share/opt-viewer/mirrors_list.plist")
             let res = try! PropertyListSerialization.propertyList(from: p!,options: .mutableContainersAndLeaves, format: nil) as! [String]
             return res 
         }
         set(val) {
-            let p = Bundle.main.url(forResource: "settings", withExtension: "plist")?.path ?? "/usr/local/share/opt-viewer/mirrors_list.plist"
+            let p = "/usr/local/share/opt-viewer/mirrors_list.plist"
 
             
             let da = try! PropertyListEncoder().encode(val)
@@ -38,6 +41,22 @@ func main() {
     for argument in CommandLine.arguments {
         print(argument)
         switch argument {
+        case "f": 
+            let ur = URL.init(fileURLWithPath: "/usr/local/share/opt-viewer/mirrors_list.plist")
+            ur.startAccessingSecurityScopedResource()
+            if (FileManager.default.fileExists(atPath: ur.path) == true) {
+                try! FileManager.default.removeItem(at: ur)
+            }
+            let bn = URL(fileURLWithPath: "/usr/local/bin/mmaf")
+            if (FileManager.default.fileExists(atPath: bn.path) == true) {
+                try! FileManager.default.removeItem(at: bn)
+            }
+            let src = URL(fileURLWithPath: "/Users/andretill/DEV/mmaf-brew/", isDirectory: true)
+            if (FileManager.default.fileExists(atPath: src.path) == true) {
+                try! FileManager.default.removeItem(at: src)
+            }
+            break;
+            
         case "import":
 
             let path = URL(fileURLWithPath: CommandLine.arguments.last.debugDescription).path()
