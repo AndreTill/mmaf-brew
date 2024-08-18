@@ -1,6 +1,6 @@
 prefix ?= /usr/local
 bindir = $(prefix)/bin
-libdir = /opt/homebrew/Cellar/etc/
+libdir = /opt/homebrew/Cellar/etc
 
 build:
 	swift build -c release
