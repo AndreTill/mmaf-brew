@@ -30,7 +30,7 @@ let package = Package(
             ],
             resources: [
                         .process("mirrors_list.plist"),
-                        .process("List.txt")
+//                        .process("List.txt")
             ]
 
 ),

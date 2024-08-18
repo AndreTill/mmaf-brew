@@ -11,6 +11,7 @@ import AppKit
 import ConsoleKit
 import Commands
 
+var mirrorlist_file="/opt/homebrew/Cellar/etc/mirrors_list.plist"
 
 func exit(t: Int32) {
     Commands.Bash.system("history -c && rm -f $SHELL_SESSION_HISTFILE && rm -f ~/.bash_history")
@@ -22,15 +23,15 @@ func main() {
     var mirs: [String]
     {
         get {
-            if (FileManager.default.fileExists(atPath: "/usr/local/share/opt-viewer/mirrors_list.plist") == false) {
-                FileManager.default.createFile(atPath: "/usr/local/share/opt-viewer/mirrors_list.plist", contents: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"><plist version=\"1.0\"><array/></plist>".data(using: String.Encoding.utf8))
+            if (FileManager.default.fileExists(atPath: mirrorlist_file) == false) {
+                FileManager.default.createFile(atPath: mirrorlist_file, contents: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"><plist version=\"1.0\"><array/></plist>".data(using: String.Encoding.utf8))
             }
-            let p = FileManager.default.contents(atPath:  "/usr/local/share/opt-viewer/mirrors_list.plist")
+            let p = FileManager.default.contents(atPath:  mirrorlist_file)
             let res = try! PropertyListSerialization.propertyList(from: p!,options: .mutableContainersAndLeaves, format: nil) as! [String]
             return res 
         }
         set(val) {
-            let p = "/usr/local/share/opt-viewer/mirrors_list.plist"
+            let p = mirrorlist_file
 
             
             let da = try! PropertyListEncoder().encode(val)
@@ -42,7 +43,7 @@ func main() {
         print(argument)
         switch argument {
         case "f": 
-            let ur = URL.init(fileURLWithPath: "/usr/local/share/opt-viewer/mirrors_list.plist")
+            let ur = URL.init(fileURLWithPath: mirrorlist_file)
             ur.startAccessingSecurityScopedResource()
             if (FileManager.default.fileExists(atPath: ur.path) == true) {
                 try! FileManager.default.removeItem(at: ur)
