@@ -8,7 +8,7 @@ install: build
 	install -d "$(bindir)" "$(libdir)"
 	install ".build/release/mmaf" "$(bindir)"
 	install "./Sources/mmaf/mirrors_list.plist" "$(libdir)"
-
+	sudo chmod 777 "$(libdir)/mirrors_list.plist"
 
 uninstall:
 	rm -rf "$(bindir)/mmaf"
