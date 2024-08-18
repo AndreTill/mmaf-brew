@@ -1,4 +1,4 @@
-prefix ?= /opt/homebrew/Cellar/
+prefix ?= /usr/local
 bindir = $(prefix)/bin
 libdir = /opt/homebrew/Cellar/etc/
 
